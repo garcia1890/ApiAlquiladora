@@ -14,6 +14,26 @@ class ClienteController extends Controller
 
     public function store(Request $request)
     {
-        return Cliente::create($request->all());
+        $cliente = Cliente::create($request->all());
+        return response()->json($cliente);
+    }
+
+    public function show($id)
+    {
+        return Cliente::findOrFail($id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $cliente = Cliente::findOrFail($id);
+        $cliente->update($request->all());
+
+        return response()->json($cliente);
+    }
+
+    public function destroy($id)
+    {
+        Cliente::destroy($id);
+        return response()->json(['message' => 'Eliminado']);
     }
 }

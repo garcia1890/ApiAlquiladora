@@ -14,14 +14,21 @@ class ProductoController extends Controller
 
     public function store(Request $request)
     {
-        return Producto::create($request->all());
+        $producto = Producto::create($request->all());
+        return response()->json($producto);
+    }
+
+    public function show($id)
+    {
+        return Producto::findOrFail($id);
     }
 
     public function update(Request $request, $id)
     {
-        $producto = Producto::find($id);
+        $producto = Producto::findOrFail($id);
         $producto->update($request->all());
-        return $producto;
+
+        return response()->json($producto);
     }
 
     public function destroy($id)

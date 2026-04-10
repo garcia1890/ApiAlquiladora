@@ -6,15 +6,18 @@ use Illuminate\Database\Eloquent\Model;
 
 class Producto extends Model
 {
-    protected $table = 'Producto';
-    protected $primaryKey = 'Id_producto';
-    public $timestamps = false;
+    protected $table = 'productos';
 
     protected $fillable = [
-        'Nombre',
-        'Descripcion',
-        'Precio',
-        'Cantidad_disponible',
-        'Categoria'
+        'nombre',
+        'descripcion',
+        'precio',
+        'cantidad_disponible',
+        'categoria'
     ];
+
+    public function detalles()
+    {
+        return $this->hasMany(DetalleRenta::class, 'producto_id');
+    }
 }

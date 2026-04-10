@@ -6,12 +6,20 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cliente extends Model
 {
-    protected $table = 'Cliente';
-    protected $primaryKey = 'Id_cliente';
-    public $timestamps = false;
+    protected $table = 'clientes';
 
     protected $fillable = [
-        'Id_usuario',
-        'Direccion'
+        'usuario_id',
+        'direccion'
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'usuario_id');
+    }
+
+    public function rentas()
+    {
+        return $this->hasMany(Renta::class, 'cliente_id');
+    }
 }

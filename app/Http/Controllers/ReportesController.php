@@ -2,19 +2,27 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;  // ← este es tu modelo real
-use Barryvdh\DomPDF\Facade\Pdf;
-
-use Illuminate\Support\Facades\DB;
+use App\Models\Renta;
+use App\Models\Producto;
 
 class ReportesController extends Controller
 {
-    public function usuariosPDF()
+    public function totalRentas()
     {
-        $usuarios = DB::table('cliente')->get();   // ← sin modelo
+        return response()->json([
+            'total_rentas' => Renta::count()
+        ]);
+    }
 
-       $pdf = Pdf::loadView('cpanel.reportes.pdf', compact('usuarios'));
-        return $pdf->stream('usuarios.pdf');
+    public function ingresosTotales()
+    {
+        return response()->json([
+            'ingresos' => Renta::sum('total')
+        ]);
+    }
+
+    public function productos()
+    {
+        return Producto::all();
     }
 }
-

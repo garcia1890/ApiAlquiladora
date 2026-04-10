@@ -2,24 +2,21 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Pago extends Model
 {
-    protected $table = 'Pago';
-    protected $primaryKey = 'Id_pago';
-    public $timestamps = false;
+    protected $table = 'pagos';
 
     protected $fillable = [
-        'Monto',
-        'Metodo_pago',
-        'Fecha_pago',
-        'Id_renta'
+        'monto',
+        'metodo_pago',
+        'fecha_pago',
+        'renta_id'
     ];
 
     public function renta()
     {
-        return $this->belongsTo(Renta::class, 'Id_renta');
+        return $this->belongsTo(Renta::class, 'renta_id');
     }
 }

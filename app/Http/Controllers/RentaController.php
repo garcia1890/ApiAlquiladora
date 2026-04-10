@@ -14,11 +14,26 @@ class RentaController extends Controller
 
     public function store(Request $request)
     {
-        return Renta::create($request->all());
+        $renta = Renta::create($request->all());
+        return response()->json($renta);
     }
 
     public function show($id)
     {
-        return Renta::find($id);
+        return Renta::findOrFail($id);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $renta = Renta::findOrFail($id);
+        $renta->update($request->all());
+
+        return response()->json($renta);
+    }
+
+    public function destroy($id)
+    {
+        Renta::destroy($id);
+        return response()->json(['message' => 'Eliminado']);
     }
 }

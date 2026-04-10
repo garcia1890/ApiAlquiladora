@@ -2,31 +2,27 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
 
 class Entrega extends Model
 {
-    protected $table = 'Entrega';
-    protected $primaryKey = 'Id_entrega';
-    public $timestamps = false;
+    protected $table = 'entregas';
 
     protected $fillable = [
-        'Fecha_entregado',
-        'Fecha_recogida',
-        'Direccion_entrega',
-        'Id_renta',
-        'Id_empleado'
+        'fecha_entregado',
+        'fecha_recogida',
+        'direccion_entrega',
+        'renta_id',
+        'empleado_id'
     ];
 
     public function renta()
     {
-        return $this->belongsTo(Renta::class, 'Id_renta');
+        return $this->belongsTo(Renta::class, 'renta_id');
     }
 
     public function empleado()
     {
-        return $this->belongsTo(Empleado::class, 'Id_empleado');
+        return $this->belongsTo(Empleado::class, 'empleado_id');
     }
 }

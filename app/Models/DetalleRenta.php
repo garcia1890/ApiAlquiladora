@@ -2,31 +2,26 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class DetalleRenta extends Model
 {
-    protected $table = 'Detalle_Renta';
-    protected $primaryKey = 'Id_detalle';
-    public $timestamps = false;
+    protected $table = 'detalle_rentas';
 
     protected $fillable = [
-        'Cantidad',
-        'Precio_unitario',
-        'Subtotal',
-        'Id_renta',
-        'Id_producto'
+        'cantidad',
+        'precio_unitario',
+        'renta_id',
+        'producto_id'
     ];
 
-    // Relaciones
     public function renta()
     {
-        return $this->belongsTo(Renta::class, 'Id_renta');
+        return $this->belongsTo(Renta::class, 'renta_id');
     }
 
     public function producto()
     {
-        return $this->belongsTo(Producto::class, 'Id_producto');
+        return $this->belongsTo(Producto::class, 'producto_id');
     }
 }
